@@ -5,16 +5,7 @@ export function CTA() {
   return (
     <section className="py-28 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="relative rounded-3xl overflow-hidden">
-          {/* Background image */}
-          <img
-            src="/images/handshake.png"
-            alt="Business partnership"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-brand-blue/85" />
-
+        <div className="relative rounded-3xl overflow-hidden bg-brand-blue">
           {/* Content */}
           <div className="relative z-10 px-10 py-20 md:px-20 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
             <div className="max-w-xl">
