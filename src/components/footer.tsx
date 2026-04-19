@@ -1,6 +1,21 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const companyLinks = [
+  { name: "About Us", path: "/about" },
+  { name: "Our Services", path: "/services" },
+  { name: "Mission & Values", path: "/mission" },
+  { name: "Our Process", path: "/process" },
+];
+
+const serviceLinks = [
+  { name: "IT Consultancy", path: "/services/it-consultancy" },
+  { name: "Custom Software", path: "/services/custom-software" },
+  { name: "Network Infrastructure", path: "/services/network-design" },
+  { name: "VoIP Solutions", path: "/services/voip" },
+  { name: "Security", path: "/services/security" },
+];
+
 export function Footer() {
   return (
     <footer className="bg-gray-950 text-gray-400">
@@ -35,11 +50,11 @@ export function Footer() {
           <div>
             <h4 className="font-secondary text-white text-sm font-semibold mb-5 tracking-wide">Company</h4>
             <ul className="space-y-3">
-              {["About Us", "Our Services", "Why Sparrowwave", "Careers"].map((item) => (
-                <li key={item}>
-                  <a href="#" className="font-secondary text-sm text-gray-400 hover:text-white transition-colors duration-200">
-                    {item}
-                  </a>
+              {companyLinks.map((link) => (
+                <li key={link.name}>
+                  <Link to={link.path} className="font-secondary text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -49,11 +64,11 @@ export function Footer() {
           <div>
             <h4 className="font-secondary text-white text-sm font-semibold mb-5 tracking-wide">Services</h4>
             <ul className="space-y-3">
-              {["IT Consultancy", "Custom Software", "Network Infrastructure", "VoIP Solutions", "Security"].map((item) => (
-                <li key={item}>
-                  <a href="#" className="font-secondary text-sm text-gray-400 hover:text-white transition-colors duration-200">
-                    {item}
-                  </a>
+              {serviceLinks.map((link) => (
+                <li key={link.name}>
+                  <Link to={link.path} className="font-secondary text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -66,8 +81,8 @@ export function Footer() {
             © {new Date().getFullYear()} Sparrowwave IT Solutions. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="font-secondary text-xs text-gray-500 hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="font-secondary text-xs text-gray-500 hover:text-white transition-colors">Terms of Service</a>
+            <Link to="#" className="font-secondary text-xs text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="#" className="font-secondary text-xs text-gray-500 hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
