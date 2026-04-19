@@ -1,5 +1,5 @@
 import { NavLink, Link } from "react-router-dom";
-import { Menu, X, ChevronDown, Building2, Target, GitBranch, MessageSquare, Code2, Network, Phone, ShieldCheck, Video, GraduationCap, Headphones, Wifi, Lightbulb, FileSearch } from "lucide-react";
+import { Menu, X, ChevronDown, Building2, Target, GitBranch, Code2, Network, Phone, ShieldCheck, Video, GraduationCap, Headphones, Wifi, Lightbulb, FileSearch } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const companyLinks = [
