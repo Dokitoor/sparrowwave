@@ -32,8 +32,8 @@ export function Services() {
           </div>
           <div className="relative rounded-2xl overflow-hidden shadow-xl shadow-brand-blue/10 h-64 lg:h-80">
             <img
-              src="/images/datacenter.png"
-              alt="Network engineer in a data center"
+              src="/images/hero.png"
+              alt="Sparrowwave engineers in a modern Lagos office environment"
               className="w-full h-full object-cover"
             />
           </div>

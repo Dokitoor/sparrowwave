@@ -52,10 +52,12 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right: Code Animation */}
+          {/* Right: Code Animation - Integrated Look */}
           <div className="relative hidden lg:block h-[500px]">
-            <div className="absolute inset-0 bg-brand-blue/5 rounded-[2rem] blur-3xl -z-10 translate-x-12 translate-y-12" />
-            <SparrowCodeStream />
+            <div className="absolute inset-0 bg-brand-blue/[0.03] rounded-3xl -z-10" />
+            <div className="h-full pl-8 py-4">
+              <SparrowCodeStream />
+            </div>
             
             {/* Minimal floating card */}
             <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl px-6 py-5 shadow-xl border border-gray-100 flex items-center gap-5">
