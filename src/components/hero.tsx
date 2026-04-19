@@ -21,15 +21,16 @@ export function Hero() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-blue/8 border border-brand-blue/15 mb-10">
               <span className="w-2 h-2 rounded-full bg-brand-teal animate-pulse" />
-              <span className="text-xs font-semibold tracking-widest text-brand-blue uppercase font-secondary">Engineering Excellence</span>
+              <span className="text-xs font-semibold tracking-widest text-brand-blue uppercase font-secondary">Trusted IT Solutions Partner in Nigeria</span>
             </div>
 
-            <h1 className="font-primary text-[3rem] sm:text-[3.75rem] lg:text-[4.2rem] leading-[1.05] font-bold text-gray-900 mb-7">
-              Building the <span className="text-brand-blue italic text-[1.1em]">Code</span> that scales your vision.
+            <h1 className="font-primary text-[3rem] sm:text-[3.75rem] lg:text-[4.5rem] leading-[1.05] font-bold text-gray-900 mb-7">
+              Transforming Businesses Through{" "}
+              <span className="text-brand-blue italic">Technology</span>
             </h1>
 
             <p className="font-secondary text-xl text-gray-500 leading-relaxed max-w-xl mb-8">
-              Discover the engineering prowess and strategic solutions that power high-performance digital infrastructure for Africa's leading institutions.
+              Professional unified communications, network infrastructure, and custom software delivering operational excellence with integrity.
             </p>
 
             <ul className="space-y-3 mb-10">
@@ -58,25 +59,10 @@ export function Hero() {
             <div className="h-full pl-8 py-4">
               <SparrowCodeStream />
             </div>
-            
-            {/* Minimal floating card */}
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl px-6 py-5 shadow-xl border border-gray-100 flex items-center gap-5">
-              <div className="flex -space-x-3">
-                {[1,2,3].map(i => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center">
-                    <span className="text-[10px] font-bold text-gray-400">DEV</span>
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div className="font-primary text-sm font-bold text-gray-900 text-[1.5em]">+15</div>
-                <div className="font-secondary text-[10px] text-gray-500 font-bold uppercase tracking-wider">Engineers Scaling Projects</div>
-              </div>
-            </div>
+            {/* Floating stat card removed as per user request */}
           </div>
         </div>
       </div>
     </section>
   );
 }
-
