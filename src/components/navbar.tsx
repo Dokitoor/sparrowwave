@@ -6,7 +6,6 @@ const companyLinks = [
   { name: "About Us", path: "/about", icon: Building2 },
   { name: "Mission & Values", path: "/mission", icon: Target },
   { name: "Our Process", path: "/process", icon: GitBranch },
-  { name: "FAQ", path: "/faq", icon: MessageSquare },
 ];
 
 const serviceLinks = [

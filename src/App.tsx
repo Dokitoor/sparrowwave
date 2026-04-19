@@ -7,7 +7,6 @@ import { Services } from "./pages/services";
 import { Contact } from "./pages/contact";
 import { Mission } from "./pages/mission";
 import { ProcessPage } from "./pages/process";
-import { FAQ } from "./pages/faq";
 import { Solutions } from "./pages/solutions";
 import { Resources } from "./pages/resources";
 // Service sub-pages
@@ -38,7 +37,6 @@ function App() {
             {/* Company Sub-Pages */}
             <Route path="/mission" element={<Mission />} />
             <Route path="/process" element={<ProcessPage />} />
-            <Route path="/faq" element={<FAQ />} />
             {/* Service Detail Pages */}
             <Route path="/services/it-consultancy" element={<ITConsultancy />} />
             <Route path="/services/it-audit" element={<ITAudit />} />

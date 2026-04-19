@@ -50,25 +50,23 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 
 export function FAQ() {
   return (
-    <div className="pt-[72px] min-h-screen">
-      <div className="py-24 px-6 lg:px-8 bg-gray-950 text-white">
-        <div className="max-w-7xl mx-auto">
-          <p className="font-secondary text-sm font-semibold text-brand-teal tracking-widest uppercase mb-5">FAQ</p>
-          <h1 className="font-primary text-5xl md:text-7xl font-bold text-white mb-6 max-w-3xl leading-tight">
+    <section id="faq" className="py-24 bg-white border-t border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <p className="font-secondary text-sm font-semibold text-brand-teal tracking-widest uppercase mb-4">FAQ</p>
+          <h2 className="font-primary text-4xl md:text-5xl font-bold text-gray-900 mb-5">
             Frequently Asked Questions
-          </h1>
-          <p className="font-secondary text-gray-400 text-xl max-w-xl leading-relaxed">
+          </h2>
+          <p className="font-secondary text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
             Everything you need to know about working with Sparrowwave.
           </p>
         </div>
-      </div>
 
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
           {faqs.map((section) => (
-            <div key={section.category} className="mb-16">
-              <h2 className="font-primary text-2xl font-bold text-brand-blue mb-6 pb-3 border-b border-gray-100">{section.category}</h2>
-              <div>
+            <div key={section.category} className="mb-12 last:mb-0">
+              <h3 className="font-primary text-2xl font-bold text-brand-blue mb-6 pb-2 border-b border-gray-100">{section.category}</h3>
+              <div className="space-y-1">
                 {section.questions.map((item) => (
                   <FaqItem key={item.q} question={item.q} answer={item.a} />
                 ))}
@@ -76,7 +74,7 @@ export function FAQ() {
             </div>
           ))}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
