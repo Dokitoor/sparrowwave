@@ -95,6 +95,12 @@ export function Navbar() {
               Solutions
             </NavLink>
             <NavLink
+              to="/products"
+              className="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors"
+            >
+              Products
+            </NavLink>
+            <NavLink
               to="/resources"
               className="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors"
             >
@@ -140,6 +146,7 @@ export function Navbar() {
               </NavLink>
             ))}
             <NavLink to="/solutions" onClick={() => setIsOpen(false)} className="block px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50">Solutions</NavLink>
+            <NavLink to="/products" onClick={() => setIsOpen(false)} className="block px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50">Products</NavLink>
             <NavLink to="/resources" onClick={() => setIsOpen(false)} className="block px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50">Resources</NavLink>
             <Link to="/contact" onClick={() => setIsOpen(false)} className="block mt-4 w-full text-center px-5 py-3 bg-brand-blue text-white text-sm font-semibold rounded-full hover:bg-brand-blue/90 transition-colors">
               Contact Us

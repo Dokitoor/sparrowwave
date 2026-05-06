@@ -8,6 +8,7 @@ import { Contact } from "./pages/contact";
 import { Mission } from "./pages/mission";
 import { ProcessPage } from "./pages/process";
 import { Solutions } from "./pages/solutions";
+import { Products } from "./pages/products";
 import { Resources } from "./pages/resources";
 // Service sub-pages
 import { ITConsultancy } from "./pages/services/it-consultancy";
@@ -50,6 +51,7 @@ function App() {
             <Route path="/services/remote-classrooms" element={<RemoteClassroomsPage />} />
             {/* Solutions & Resources */}
             <Route path="/solutions" element={<Solutions />} />
+            <Route path="/products" element={<Products />} />
             <Route path="/resources" element={<Resources />} />
           </Routes>
         </main>
