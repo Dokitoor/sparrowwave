@@ -295,7 +295,7 @@ export function Products() {
             Enterprise-Grade Networking Hardware
           </h1>
           <p className="font-secondary text-gray-400 text-xl max-w-2xl leading-relaxed">
-            Sparrowwave is an authorised reseller of BDCOM networking equipment — switches, chassis systems, and firewalls engineered for reliability at every scale.
+            Sparrowwave is an authorised reseller of BDCOM networking equipment via Jetra Limited, an official BDCOM partnership — delivering switches, chassis systems, and firewalls engineered for reliability at every scale.
           </p>
         </div>
       </div>
