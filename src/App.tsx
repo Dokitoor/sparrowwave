@@ -26,18 +26,23 @@ function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-white flex flex-col">
+
         <Navbar />
 
         <main className="flex-grow">
+          
           <Routes>
+
             {/* Core Pages */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
+
             {/* Company Sub-Pages */}
             <Route path="/mission" element={<Mission />} />
             <Route path="/process" element={<ProcessPage />} />
+
             {/* Service Detail Pages */}
             <Route path="/services/it-consultancy" element={<ITConsultancy />} />
             <Route path="/services/it-audit" element={<ITAudit />} />
@@ -49,11 +54,14 @@ function App() {
             <Route path="/services/contact-centers" element={<ContactCentersPage />} />
             <Route path="/services/video-conferencing" element={<VideoConferencingPage />} />
             <Route path="/services/remote-classrooms" element={<RemoteClassroomsPage />} />
+
             {/* Solutions & Resources */}
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/products" element={<Products />} />
             <Route path="/resources" element={<Resources />} />
+
           </Routes>
+
         </main>
 
         <Footer />
