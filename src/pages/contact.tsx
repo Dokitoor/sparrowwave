@@ -1,53 +1,53 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, MessageCircle, Linkedin, Twitter, CheckCircle, ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function Contact() {
-  // const [form, setForm] = useState({
-  //   name: "",
-  //   email: "",
-  //   phone: "",
-  //   subject: "",
-  //   message: "",
-  // });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
 
-  // const [status, setStatus] = useState({ type: "idle", message: "" });
+  const [status, setStatus] = useState({ type: "idle", message: "" });
 
-  // function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-  //   const { name, value } = e.target;
-  //   setForm((s) => ({ ...s, [name]: value }));
-  // }
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const { name, value } = e.target;
+    setForm((s) => ({ ...s, [name]: value }));
+  }
 
-  // // handles form submission with basic validation and feedback
-  // async function handleSubmit(e: React.FormEvent) {
-  //   e.preventDefault();
+  // handles form submission with basic validation and feedback
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
 
-  //   // basic client-side validation
-  //   if (!form.name || !form.email || !form.subject || !form.message) {
-  //     setStatus({ type: "error", message: "Please fill out all required fields." });
-  //     return;
-  //   }
+    // basic client-side validation
+    if (!form.name || !form.email || !form.subject || !form.message) {
+      setStatus({ type: "error", message: "Please fill out all required fields." });
+      return;
+    }
 
-  //   setStatus({ type: "loading", message: "" });
+    setStatus({ type: "loading", message: "" });
     
-  //   try {
-  //     const res = await fetch("/api/contact", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify(form),
-  //     });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-  //     if (!res.ok) {
-  //       const data = await res.json().catch(() => ({}));
-  //       throw new Error(data?.message || `Server returned ${res.status}`);
-  //     }
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.message || `Server returned ${res.status}`);
+      }
 
-  //     setStatus({ type: "success", message: "Thanks — we'll be in touch soon." });
-  //     setForm({ name: "", email: "", phone: "", subject: "", message: "" });
-  //   } catch (err: any) {
-  //     setStatus({ type: "error", message: err?.message || 'Failed to send message.' });
-  //   }
-  // }
+      setStatus({ type: "success", message: "Thanks — we'll be in touch soon." });
+      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (err: any) {
+      setStatus({ type: "error", message: err?.message || 'Failed to send message.' });
+    }
+  }
 
   return (
     <div className="pt-[72px] min-h-screen bg-white">
