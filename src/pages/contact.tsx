@@ -1,7 +1,54 @@
+// import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, MessageCircle, Linkedin, Twitter, CheckCircle, ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function Contact() {
+  // const [form, setForm] = useState({
+  //   name: "",
+  //   email: "",
+  //   phone: "",
+  //   subject: "",
+  //   message: "",
+  // });
+
+  // const [status, setStatus] = useState({ type: "idle", message: "" });
+
+  // function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  //   const { name, value } = e.target;
+  //   setForm((s) => ({ ...s, [name]: value }));
+  // }
+
+  // // handles form submission with basic validation and feedback
+  // async function handleSubmit(e: React.FormEvent) {
+  //   e.preventDefault();
+
+  //   // basic client-side validation
+  //   if (!form.name || !form.email || !form.subject || !form.message) {
+  //     setStatus({ type: "error", message: "Please fill out all required fields." });
+  //     return;
+  //   }
+
+  //   setStatus({ type: "loading", message: "" });
+    
+  //   try {
+  //     const res = await fetch("/api/contact", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(form),
+  //     });
+
+  //     if (!res.ok) {
+  //       const data = await res.json().catch(() => ({}));
+  //       throw new Error(data?.message || `Server returned ${res.status}`);
+  //     }
+
+  //     setStatus({ type: "success", message: "Thanks — we'll be in touch soon." });
+  //     setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+  //   } catch (err: any) {
+  //     setStatus({ type: "error", message: err?.message || 'Failed to send message.' });
+  //   }
+  // }
+
   return (
     <div className="pt-[72px] min-h-screen bg-white">
       {/* Hero Section */}
@@ -123,11 +170,15 @@ export function Contact() {
               <p className="font-secondary text-gray-500 text-sm">Fill out the form and we'll get back to you within 24 hours.</p>
             </div>
             
-            <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); alert("Thank you for reaching out! Our team will respond shortly."); }}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              {/* form state is managed via React state below */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block font-secondary text-sm font-semibold text-gray-700 mb-2">Full name</label>
                   <input
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
                     type="text"
                     placeholder="John Doe"
                     required
@@ -137,6 +188,9 @@ export function Contact() {
                 <div>
                   <label className="block font-secondary text-sm font-semibold text-gray-700 mb-2">Work email</label>
                   <input
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
                     type="email"
                     placeholder="john@company.com"
                     required
@@ -149,6 +203,9 @@ export function Contact() {
                 <div>
                   <label className="block font-secondary text-sm font-semibold text-gray-700 mb-2">Phone (optional)</label>
                   <input
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
                     type="tel"
                     placeholder="+234 123 456 7890"
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 outline-none transition-all font-secondary text-gray-800 placeholder:text-gray-400"
@@ -157,6 +214,9 @@ export function Contact() {
                 <div>
                   <label className="block font-secondary text-sm font-semibold text-gray-700 mb-2">Subject</label>
                   <input
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
                     type="text"
                     placeholder="How can we help?"
                     required
@@ -168,6 +228,9 @@ export function Contact() {
               <div>
                 <label className="block font-secondary text-sm font-semibold text-gray-700 mb-2">Project details</label>
                 <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
                   rows={5}
                   placeholder="Tell us about your requirements, timeline, and budget..."
                   required
@@ -177,9 +240,10 @@ export function Contact() {
               
               <button
                 type="submit"
-                className="w-full py-4 bg-brand-blue text-white font-semibold rounded-full hover:bg-brand-blue/90 transition-all duration-300 font-secondary shadow-md hover:shadow-lg group"
+                disabled={status.type === 'loading'}
+                className="w-full py-4 bg-brand-blue text-white font-semibold rounded-full hover:bg-brand-blue/90 transition-all duration-300 font-secondary shadow-md hover:shadow-lg group disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Send Message
+                {status.type === 'loading' ? 'Sending…' : 'Send Message'}
                 <ArrowRight className="inline-block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </button>
               
@@ -187,6 +251,12 @@ export function Contact() {
                 By submitting, you agree to our <Link to="/privacy" className="text-brand-teal hover:underline">Privacy Policy</Link>. We'll never share your data.
               </p>
             </form>
+            {status.type === 'success' && (
+              <div className="mt-4 text-sm text-green-600">{status.message || 'Message sent — we will reply shortly.'}</div>
+            )}
+            {status.type === 'error' && (
+              <div className="mt-4 text-sm text-red-600">{status.message || 'There was an error sending your message.'}</div>
+            )}
           </div>
         </div>
 
