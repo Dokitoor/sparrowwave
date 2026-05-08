@@ -3,7 +3,6 @@ import {
   PenTool, 
   Rocket, 
   LifeBuoy,
-  ArrowRight
 } from 'lucide-react';
 
 // Step data with icons
