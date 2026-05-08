@@ -7,6 +7,7 @@ const companyLinks = [
   { name: "Our Services", path: "/services" },
   { name: "Mission & Values", path: "/mission" },
   { name: "Our Process", path: "/process" },
+  { name: "FAQ", path: "/faq" },
 ];
 
 const serviceLinks = [
@@ -17,12 +18,12 @@ const serviceLinks = [
   { name: "Security", path: "/services/security" },
 ];
 
-const resourceLinks = [
-  { name: "Case Studies", path: "/resources/case-studies" },
-  { name: "Blog & Insights", path: "/resources/blog" },
-  { name: "FAQ", path: "/faq" },
-  { name: "Support", path: "/support" },
-];
+// const resourceLinks = [
+//   // { name: "Case Studies", path: "/resources/case-studies" },
+//   // { name: "Blog & Insights", path: "/resources/blog" },
+  // { name: "FAQ", path: "/faq" },
+//   // { name: "Support", path: "/support" },
+// ];
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -114,8 +115,8 @@ export function Footer() {
 
           {/* Resources & Newsletter column */}
           <div>
-            <h4 className="font-secondary text-white text-sm font-semibold mb-5 tracking-wide uppercase">Resources</h4>
-            <ul className="space-y-2.5 mb-6">
+            {/* <h4 className="font-secondary text-white text-sm font-semibold mb-5 tracking-wide uppercase">Resources</h4> */}
+            {/* <ul className="space-y-2.5 mb-6">
               {resourceLinks.map((link) => (
                 <li key={link.name}>
                   <Link 
@@ -126,9 +127,10 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ul> */}
             
             {/* Social media icons */}
+            <h4 className="font-secondary text-white text-sm font-semibold mb-5 tracking-wide uppercase">Social Handles</h4>
             <div className="flex gap-4 mt-4">
               <a href="#" className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-brand-blue hover:text-white transition-all duration-300">
                 <Linkedin className="w-4 h-4" />
