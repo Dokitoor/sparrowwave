@@ -33,7 +33,7 @@ export function SocialProof() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
-  const autoSlideInterval = useRef<NodeJS.Timeout | null>(null);
+  const autoSlideInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Scroll to a specific index with smooth behavior
   const scrollTo = (index: number) => {
