@@ -179,7 +179,7 @@ export function SocialProof() {
               className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 pb-4 hide-scrollbar"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
-              {clients.map((client, idx) => (
+              {clients.map((client) => (
                 <div
                   key={client.acronym}
                   className="flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(20%-16px)] snap-start"
