@@ -21,11 +21,14 @@ import { VoIPPage } from "./pages/services/voip";
 import { ContactCentersPage } from "./pages/services/contact-centers";
 import { VideoConferencingPage } from "./pages/services/video-conferencing";
 import { RemoteClassroomsPage } from "./pages/services/remote-classrooms";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-white flex flex-col">
+
+        <ScrollToTop />
 
         <Navbar />
 
