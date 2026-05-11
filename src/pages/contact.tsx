@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, MessageCircle, Linkedin, Twitter, CheckCircle, ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { apiFetch } from "@/lib/api";
+import Swal from "sweetalert2";
 
 export function Contact() {
   const [form, setForm] = useState({
@@ -28,24 +30,73 @@ export function Contact() {
       return;
     }
 
-    setStatus({ type: "loading", message: "" });
+    setStatus({ type: "loading", message: "Sending..." });
     
     try {
-      const res = await fetch("/api/contact", {
+
+      // send form data to backend API
+      const res = await apiFetch("/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
+      // attempt to parse response data, but don't fail if it's not JSON
+      const data = await res.json().catch(() => ({}));
+
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data?.message || `Server returned ${res.status}`);
+
+        // try to parse error message from response, fallback to status text
+        // const data = await res.json().catch(() => ({}));
+        // throw new Error(data?.message || `Server returned ${res.status}`);
+        
+        const errorMessage = data?.message || `Server returned ${res.status}`;
+        const errors = data?.errors;
+        const errorText = errors ? Object.values(errors).flat().join(' ') : errorMessage;
+
+        // set status error display
+        setStatus({ type: "error", message: errorMessage });
+
+        // Display the error message using sweetalert2
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to Send Message!',
+          text: errorText,
+          timer: 3000,
+          showConfirmButton: true,
+        });
+
+        return;
+        
       }
 
-      setStatus({ type: "success", message: "Thanks — we'll be in touch soon." });
+      // set success status for display below form and reset form fields
+      setStatus({ type: "success", message: data?.message || "Thanks — we'll be in touch soon." });
       setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+
+      // Display the success message using sweetalert2
+      Swal.fire({
+        icon: 'success',
+        title: 'Message Sent!',
+        text: data?.message || "Thanks — we'll be in touch soon.",
+        timer: 3000,
+        showConfirmButton: true,
+      });
+
     } catch (err: any) {
+
+      // set error status for display below form
       setStatus({ type: "error", message: err?.message || 'Failed to send message.' });
+
+      // Display the error message using sweetalert2
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed to Send Message!',
+        text: err?.message || 'An unexpected error occurred. Please try again later.',
+        timer: 3000,
+        showConfirmButton: true,
+      });
+
     }
   }
 
@@ -243,7 +294,7 @@ export function Contact() {
                 disabled={status.type === 'loading'}
                 className="w-full py-4 bg-brand-blue text-white font-semibold rounded-full hover:bg-brand-blue/90 transition-all duration-300 font-secondary shadow-md hover:shadow-lg group disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {status.type === 'loading' ? 'Sending…' : 'Send Message'}
+                {status.type === 'loading' ? status.message : 'Send Message'}
                 <ArrowRight className="inline-block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </button>
               
@@ -251,12 +302,12 @@ export function Contact() {
                 By submitting, you agree to our <Link to="/privacy" className="text-brand-teal hover:underline">Privacy Policy</Link>. We'll never share your data.
               </p>
             </form>
-            {status.type === 'success' && (
+            {/* {status.type === 'success' && (
               <div className="mt-4 text-sm text-green-600">{status.message || 'Message sent — we will reply shortly.'}</div>
             )}
             {status.type === 'error' && (
               <div className="mt-4 text-sm text-red-600">{status.message || 'There was an error sending your message.'}</div>
-            )}
+            )} */}
           </div>
         </div>
 

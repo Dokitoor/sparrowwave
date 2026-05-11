@@ -1,6 +1,8 @@
 import { Mail, MapPin, Phone, Linkedin, Twitter, Github, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
+import { apiFetch } from '@/lib/api';
 
 const companyLinks = [
   { name: "About Us", path: "/about" },
@@ -26,17 +28,114 @@ const serviceLinks = [
 // ];
 
 export function Footer() {
-  const [email, setEmail] = useState("");
+  
+  const [form, setForm] = useState({
+    email: "",
+  });
+  
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const [status, setStatus] = useState({ type: "idle", message: "" });
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const { name, value } = e.target;
+    setForm((s) => ({ ...s, [name]: value }));
+  }
+
+  // handles form submission with basic validation and feedback
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setTimeout(() => setSubscribed(false), 3000);
-      setEmail("");
+
+    // basic client-side validation
+    if (!form.email.trim()) {
+      setStatus({ type: "error", message: "Please provide your email address." });
+
+      // Display the error message using sweetalert2
+      Swal.fire({
+        icon: 'error',
+        title: status.message,
+        text: "Please provide your email address.",
+        timer: 3000,
+        showConfirmButton: true,
+      });
+
+      return;
     }
-  };
+
+    // set loading status to disable button and show feedback
+    setStatus({ type: "loading", message: "Subscribing..." });
+    
+    try {
+
+      // send subscription request to backend API
+      const res = await apiFetch("/newsletter/subscribe", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+
+      // attempt to parse response data, but don't fail if it's not JSON
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        
+        // on error, reset subscribed state and show error message from server or generic message
+        setSubscribed(false);
+        const errorMessage = data?.message || `Server returned ${res.status}`;
+        const errors = data?.errors;
+        const errorText = errors ? Object.values(errors).flat().join(' ') : errorMessage;
+
+        // set status error display
+        setStatus({ type: "error", message: errorMessage });
+
+        // Display the error message using sweetalert2
+        Swal.fire({
+          icon: 'error',
+          title: 'Subscription Failed!',
+          text: errorText,
+          timer: 3000,
+          showConfirmButton: true,
+        });
+
+        return;
+
+      }
+
+      // on success, show message and reset form
+      setStatus({ type: "success", message: data?.message || "Thanks — Subscription successful!" });
+      setForm({ email: "" });
+
+      // prevent multiple rapid submissions by disabling the button and showing subscribed state
+      setSubscribed(true);
+
+      // reset subscribed state after 10 seconds to allow re-subscription if needed
+      setTimeout(() => setSubscribed(false), 10000);
+
+      // Display the success message using sweetalert2
+      Swal.fire({
+        icon: 'success',
+        title: 'Subscribed!',
+        text: data?.message || "Thanks for subscribing to our newsletter!",
+        timer: 3000,
+        showConfirmButton: true,
+      });
+
+    } catch (err: any) {
+
+      // on network or unexpected error, reset subscribed state and show error message
+      setStatus({ type: "error", message: err?.message || 'Failed to subscribe.' });
+      setSubscribed(false);
+
+      // Display the error message using sweetalert2
+      Swal.fire({
+        icon: 'error',
+        title: 'Subscription Failed!',
+        text: err?.message || 'An unexpected error occurred. Please try again later.',
+        timer: 3000,
+        showConfirmButton: true,
+      });
+
+    }
+  }
 
   return (
     <footer className="relative bg-gray-950 text-gray-400 overflow-hidden">
@@ -152,20 +251,22 @@ export function Footer() {
               <h4 className="font-primary text-white text-lg font-semibold mb-2">Subscribe to our newsletter</h4>
               <p className="font-secondary text-gray-400 text-sm">Get the latest insights, case studies, and tech updates directly in your inbox.</p>
             </div>
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name='email'
+                value={form.email}
+                onChange={handleChange}
                 placeholder="work@email.com"
                 required
                 className="flex-1 px-5 py-3 rounded-full bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-teal transition-colors font-secondary text-sm"
               />
               <button
                 type="submit"
+                disabled={status.type === 'loading' || subscribed}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-brand-blue text-white font-semibold text-sm hover:bg-brand-blue/90 transition-all duration-300 group"
               >
-                {subscribed ? "Subscribed!" : "Subscribe"}
+                {status.type === 'loading' ? status.message : subscribed ? "Subscribed!" : "Subscribe"}
                 {!subscribed && <Send className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />}
               </button>
             </form>
